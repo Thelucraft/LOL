@@ -257,23 +257,23 @@ local function fly(str, speed)
 			BG:Destroy()
 			BV:Destroy()
 			human.PlatformStand = false
-		end)
-		KeyDown = Mouse.KeyDown:Connect(function(key)
-			if key:lower() == 'w' then CONTROL.F = (speed and defFlyspeed)
-			elseif key:lower() == 's' then CONTROL.B = - (speed and defFlyspeed)
-			elseif key:lower() == 'a' then CONTROL.L = - (speed and defFlyspeed)
-			elseif key:lower() == 'd' then CONTROL.R = (speed and defFlyspeed)
-			elseif key:lower() == 'e' then CONTROL.Q = (speed and defFlyspeed)*2
-			elseif key:lower() == 'q' then CONTROL.E = -(speed and defFlyspeed)*2 end
-			pcall(function()workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
-		end)
-		KeyUp = Mouse.KeyUp:Connect(function(key)
-			if key:lower() == 'w' then CONTROL.F = 0
-			elseif key:lower() == 's' then CONTROL.B = 0
-			elseif key:lower() == 'a' then CONTROL.L = 0
-			elseif key:lower() == 'd' then CONTROL.R = 0
-			elseif key:lower() == 'e' then CONTROL.Q = 0
-			elseif key:lower() == 'q' then CONTROL.E = 0 end
+			KeyDown = Mouse.KeyDown:Connect(function(key)
+				if key:lower() == 'w' then CONTROL.F = (speed and defFlyspeed)
+				elseif key:lower() == 's' then CONTROL.B = - (speed and defFlyspeed)
+				elseif key:lower() == 'a' then CONTROL.L = - (speed and defFlyspeed)
+				elseif key:lower() == 'd' then CONTROL.R = (speed and defFlyspeed)
+				elseif key:lower() == 'e' then CONTROL.Q = (speed and defFlyspeed)*2
+				elseif key:lower() == 'q' then CONTROL.E = -(speed and defFlyspeed)*2 end
+				pcall(function()workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
+			end)
+			KeyUp = Mouse.KeyUp:Connect(function(key)
+				if key:lower() == 'w' then CONTROL.F = 0
+				elseif key:lower() == 's' then CONTROL.B = 0
+				elseif key:lower() == 'a' then CONTROL.L = 0
+				elseif key:lower() == 'd' then CONTROL.R = 0
+				elseif key:lower() == 'e' then CONTROL.Q = 0
+				elseif key:lower() == 'q' then CONTROL.E = 0 end
+			end)
 		end)
 	elseif str == false then
 		FLYING = false
@@ -284,6 +284,23 @@ local function fly(str, speed)
 		if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')then Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false end
 		pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
 	end
+	KeyDown = Mouse.KeyDown:Connect(function(key)
+		if key:lower() == 'w' then CONTROL.F = (speed and defFlyspeed)
+		elseif key:lower() == 's' then CONTROL.B = - (speed and defFlyspeed)
+		elseif key:lower() == 'a' then CONTROL.L = - (speed and defFlyspeed)
+		elseif key:lower() == 'd' then CONTROL.R = (speed and defFlyspeed)
+		elseif key:lower() == 'e' then CONTROL.Q = (speed and defFlyspeed)*2
+		elseif key:lower() == 'q' then CONTROL.E = -(speed and defFlyspeed)*2 end
+		pcall(function()workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
+	end)
+	KeyUp = Mouse.KeyUp:Connect(function(key)
+		if key:lower() == 'w' then CONTROL.F = 0
+		elseif key:lower() == 's' then CONTROL.B = 0
+		elseif key:lower() == 'a' then CONTROL.L = 0
+		elseif key:lower() == 'd' then CONTROL.R = 0
+		elseif key:lower() == 'e' then CONTROL.Q = 0
+		elseif key:lower() == 'q' then CONTROL.E = 0 end
+	end)
 end
 local function swim(str)
 	local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
