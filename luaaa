@@ -205,12 +205,10 @@ local function float(str)
 		if floatDied then FloatingFunction:Disconnect()qUp:Disconnect()eUp:Disconnect()qDown:Disconnect()eDown:Disconnect()floatDied:Disconnect()end
 	end
 end
-FLYING = true
+local FLYING = false
+local QEfly = true
+local flyspeed = 1
 local function fly()
-	local flyspeed = 1
-	local QEfly = true
-	local FLYING = false
-	local UserInputService = game:GetService("UserInputService")
 	local Mouse = game.Players.LocalPlayer:GetMouse()
 	repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and Root(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 	repeat wait() until Mouse
@@ -220,6 +218,7 @@ local function fly()
 	local lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
 	local SPEED = 0
 	local function FLY()
+		FLYING = true
 		local BG = Instance.new('BodyGyro')
 		local BV = Instance.new('BodyVelocity')
 		BG.P = 9e4
@@ -294,7 +293,7 @@ local function fly()
 end
 local function disableFLY()
 	FLYING = false
-	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
+	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect()flyKeyUp:Disconnect()end
 	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false end
 	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
 end
@@ -354,7 +353,13 @@ commands = {
 		end)
 		if not success then info("Error: "..err, "Error")end
 	end,
-	["fly"] = function(player, target)if target == "true" then fly()elseif target == "false" then disableFLY()else info("E", "E") end end,
+	["fly"] = function(player, target)
+		if target == "true"and FLYING == false then 
+			fly()
+		elseif target == "false" then 
+			disableFLY()
+		else info("You are already flying or something went wrong", "ERROR")end 
+	end,
 	["noclip"] = function(player, target)
 		local success, err = pcall(function()
 			if target then
