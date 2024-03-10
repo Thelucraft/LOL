@@ -435,6 +435,14 @@ commands = {
 		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
 	end,
 	["hamsterball"] = function(player)loadstring(game:HttpGet("https://pastebin.com/raw/KmnvvyC9"))()end,
+	["spin"] = function(player, target)
+		if target then
+			local spinningPart = Instance.new("Part")
+			local spinSpeed = target
+			local function spinPart()while wait(1 / 60) do if spinningPart then spinningPart.CFrame = spinningPart.CFrame * CFrame.Angles(0, math.rad(spinSpeed) / 60, 0)end end end
+			spinPart()
+		end
+	end,
 }
 local function handleCommandInput(command)
 	local splitMessage = command:lower():split(" ")
