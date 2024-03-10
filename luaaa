@@ -1,0 +1,436 @@
+local commands = {}
+local TweenService = game:GetService("TweenService")
+local Players = game.Players
+local locall = Players.LocalPlayer
+local HAUPT_GUI = Instance.new("ScreenGui")
+local HOLDER_LABEL = Instance.new("TextLabel")
+local COMMAND_FRAME = Instance.new("Frame")
+local BEFEHL_BOX = Instance.new("TextBox")
+local EXECUTE_BUTTON = Instance.new("TextButton")
+local SCHLIESEN1_BUTTON = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local LOGS_FRAME = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local LOG_LABEL = Instance.new("TextLabel")
+local LETZTE_LABEL = Instance.new("TextLabel")
+local SCHLIESEN2_BUTTON = Instance.new("TextButton")
+
+HAUPT_GUI.Name = "HAUPT_GUI"
+HAUPT_GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+HOLDER_LABEL.Name = "HOLDER_LABEL"
+HOLDER_LABEL.Parent = HAUPT_GUI
+HOLDER_LABEL.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HOLDER_LABEL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+HOLDER_LABEL.BorderSizePixel = 0
+HOLDER_LABEL.Position = UDim2.new(0.236041412, 0, 0.136962548, 0)
+HOLDER_LABEL.Size = UDim2.new(0, 493, 0, 20)
+HOLDER_LABEL.Font = Enum.Font.SourceSansBold
+HOLDER_LABEL.Text = "EXPLOIT"
+HOLDER_LABEL.TextColor3 = Color3.fromRGB(255, 255, 255)
+HOLDER_LABEL.TextScaled = true
+HOLDER_LABEL.TextSize = 14.000
+HOLDER_LABEL.TextWrapped = true
+HOLDER_LABEL.TextXAlignment = Enum.TextXAlignment.Left
+COMMAND_FRAME.Name = "COMMAND_FRAME"
+COMMAND_FRAME.Parent = HOLDER_LABEL
+COMMAND_FRAME.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+COMMAND_FRAME.BorderColor3 = Color3.fromRGB(0, 0, 0)
+COMMAND_FRAME.BorderSizePixel = 0
+COMMAND_FRAME.Position = UDim2.new(0, 0, 1.00000036, 0)
+COMMAND_FRAME.Size = UDim2.new(0, 493, 0, 33)
+BEFEHL_BOX.Name = "BEFEHL_BOX"
+BEFEHL_BOX.Parent = COMMAND_FRAME
+BEFEHL_BOX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BEFEHL_BOX.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BEFEHL_BOX.BorderSizePixel = 2
+BEFEHL_BOX.Position = UDim2.new(0, 0, 0.0283616018, 0)
+BEFEHL_BOX.Size = UDim2.new(0, 343, 0, 33)
+BEFEHL_BOX.Font = Enum.Font.SourceSansBold
+BEFEHL_BOX.PlaceholderText = "COMMAND BOX"
+BEFEHL_BOX.Text = ""
+BEFEHL_BOX.TextColor3 = Color3.fromRGB(0, 0, 0)
+BEFEHL_BOX.TextScaled = true
+BEFEHL_BOX.TextSize = 14.000
+BEFEHL_BOX.TextWrapped = true
+EXECUTE_BUTTON.Name = "EXECUTE_BUTTON"
+EXECUTE_BUTTON.Parent = COMMAND_FRAME
+EXECUTE_BUTTON.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+EXECUTE_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTE_BUTTON.BorderSizePixel = 2
+EXECUTE_BUTTON.Position = UDim2.new(0.697154462, 0, 0.0294117648, 0)
+EXECUTE_BUTTON.Size = UDim2.new(0, 150, 0, 33)
+EXECUTE_BUTTON.Font = Enum.Font.SourceSansBold
+EXECUTE_BUTTON.Text = "START"
+EXECUTE_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTE_BUTTON.TextScaled = true
+EXECUTE_BUTTON.TextSize = 14.000
+EXECUTE_BUTTON.TextWrapped = true
+SCHLIESEN1_BUTTON.Name = "SCHLIESEN1_BUTTON"
+SCHLIESEN1_BUTTON.Parent = HOLDER_LABEL
+SCHLIESEN1_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+SCHLIESEN1_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN1_BUTTON.BorderSizePixel = 0
+SCHLIESEN1_BUTTON.Position = UDim2.new(0.931034505, 0, 3.81469732e-07, 0)
+SCHLIESEN1_BUTTON.Size = UDim2.new(0, 34, 0, 20)
+SCHLIESEN1_BUTTON.Font = Enum.Font.SourceSansBold
+SCHLIESEN1_BUTTON.Text = "CLOSE"
+SCHLIESEN1_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN1_BUTTON.TextScaled = true
+SCHLIESEN1_BUTTON.TextSize = 14.000
+SCHLIESEN1_BUTTON.TextWrapped = true
+TextLabel.Parent = HAUPT_GUI
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.Visible = false
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.0674404055, 0, 0.379681021, 0)
+TextLabel.Size = UDim2.new(0, 365, 0, 20)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Output"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+LOGS_FRAME.Name = "LOGS_FRAME"
+LOGS_FRAME.Parent = TextLabel
+LOGS_FRAME.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+LOGS_FRAME.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LOGS_FRAME.BorderSizePixel = 0
+LOGS_FRAME.Position = UDim2.new(0, 0, 0.999999225, 0)
+LOGS_FRAME.Size = UDim2.new(0, 365, 0, 182)
+ScrollingFrame.Parent = LOGS_FRAME
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Size = UDim2.new(0, 365, 0, 137)
+LOG_LABEL.Name = "LOG_LABEL"
+LOG_LABEL.Parent = ScrollingFrame
+LOG_LABEL.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+LOG_LABEL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LOG_LABEL.BorderSizePixel = 0
+LOG_LABEL.Size = UDim2.new(0, 351, 0, 700)
+LOG_LABEL.Font = Enum.Font.SourceSansBold
+LOG_LABEL.TextColor3 = Color3.fromRGB(0, 135, 0)
+LOG_LABEL.TextSize = 17.000
+LOG_LABEL.TextXAlignment = Enum.TextXAlignment.Left
+LOG_LABEL.TextYAlignment = Enum.TextYAlignment.Top
+LETZTE_LABEL.Name = "LETZTE_LABEL"
+LETZTE_LABEL.Parent = LOGS_FRAME
+LETZTE_LABEL.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+LETZTE_LABEL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LETZTE_LABEL.BorderSizePixel = 0
+LETZTE_LABEL.Position = UDim2.new(0, 0, 0.846153855, 0)
+LETZTE_LABEL.Size = UDim2.new(0, 365, 0, 28)
+LETZTE_LABEL.Font = Enum.Font.SourceSansBold
+LETZTE_LABEL.TextColor3 = Color3.fromRGB(0, 112, 0)
+LETZTE_LABEL.TextSize = 20.000
+LETZTE_LABEL.TextXAlignment = Enum.TextXAlignment.Left
+SCHLIESEN2_BUTTON.Name = "SCHLIESEN2_BUTTON"
+SCHLIESEN2_BUTTON.Parent = TextLabel
+SCHLIESEN2_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+SCHLIESEN2_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN2_BUTTON.BorderSizePixel = 0
+SCHLIESEN2_BUTTON.Position = UDim2.new(0.819178104, 0, 7.62939464e-07, 0)
+SCHLIESEN2_BUTTON.Size = UDim2.new(0, 66, 0, 20)
+SCHLIESEN2_BUTTON.Font = Enum.Font.SourceSansBold
+SCHLIESEN2_BUTTON.Text = "Close"
+SCHLIESEN2_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN2_BUTTON.TextScaled = true
+SCHLIESEN2_BUTTON.TextSize = 14.000
+SCHLIESEN2_BUTTON.TextWrapped = true
+
+local chatHistory = {}
+SCHLIESEN1_BUTTON.MouseButton1Click:Connect(function()script:Destroy()end)
+SCHLIESEN2_BUTTON.MouseButton1Click:Connect(function()TextLabel.Visible = false end)
+local function logs(message)
+	LOG_LABEL.Text = table.concat(chatHistory, "\n")
+	ScrollingFrame.CanvasPosition = Vector2.new(0, (LOG_LABEL.TextBounds.Y) - 120)
+	table.insert(chatHistory, message)
+	LETZTE_LABEL.Text = "ENTERED>"..message
+	while #chatHistory > 400 do table.remove(chatHistory, 1)end
+	LOG_LABEL.Text = table.concat(chatHistory, "\n> ")
+end
+function Root(character)
+	local root = character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('UpperTorso') or character:FindFirstChild('Torso')
+	return root 
+end
+function Player(name)
+	local players = game.Players:GetPlayers()
+	for _, player in ipairs(players) do if player.Name == name then return player end end
+	return nil
+end
+local floatName = "FLOAT"
+local flying = false
+local noclipped = false
+local floated = false
+local swimming = false
+local gravity = workspace.Gravity
+local swimbeat = nil
+local function info(text, title)game:GetService("StarterGui"):SetCore("SendNotification",{Title = "RES.Q ADMIN|"..title, Text = text, Duration = 6})end
+local function log(message, text, title)logs(message)info(text, title)end
+local function float(str)
+	if str == true then
+		floated = true
+		local Mouse = game.Players.LocalPlayer:GetMouse()
+		repeat wait() until Mouse
+		local pchar = game.Players.LocalPlayer.Character
+		if pchar and not pchar:FindFirstChild(floatName) then
+			task.spawn(function()
+				local Float = Instance.new('Part')
+				Float.Name = floatName
+				Float.Parent = pchar
+				Float.Transparency = 0
+				Float.Size = Vector3.new(2,0.2,1.5)
+				Float.Anchored = true
+				local FloatValue = -3.1
+				Float.CFrame = Root(pchar).CFrame * CFrame.new(0,FloatValue,0)
+				qUp = Mouse.KeyUp:Connect(function(KEY)if KEY == 'q' then FloatValue = FloatValue + 0.5 end end)
+				eUp = Mouse.KeyUp:Connect(function(KEY)if KEY == 'e' then FloatValue = FloatValue - 0.5 end end)
+				qDown = Mouse.KeyDown:Connect(function(KEY)if KEY == 'q' then FloatValue = FloatValue - 0.5 end end)
+				eDown = Mouse.KeyDown:Connect(function(KEY)if KEY == 'e' then FloatValue = FloatValue + 0.5 end end)
+				floatDied = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()FloatingFunction:Disconnect()Float:Destroy()qUp:Disconnect()eUp:Disconnect()qDown:Disconnect()eDown:Disconnect()floatDied:Disconnect()end)
+				local function FloatPadLoop()
+					if pchar:FindFirstChild(floatName) and Root(pchar)then Float.CFrame=Root(pchar).CFrame*CFrame.new(0,FloatValue,0)
+					else FloatingFunction:Disconnect()Float:Destroy()qUp:Disconnect()eUp:Disconnect()qDown:Disconnect()eDown:Disconnect()floatDied:Disconnect()end
+				end
+				FloatingFunction = game:GetService("RunService").Heartbeat:Connect(FloatPadLoop())
+			end)
+		end
+	elseif str == false then
+		floated = false
+		local pchar = game.Players.LocalPlayer.Character
+		if pchar:FindFirstChild(floatName) then pchar:FindFirstChild(floatName):Destroy()end
+		if floatDied then FloatingFunction:Disconnect()qUp:Disconnect()eUp:Disconnect()qDown:Disconnect()eDown:Disconnect()floatDied:Disconnect()end
+	end
+end
+local function fly(str, speed)
+	speed = 7
+	local UserInputService = game:GetService("UserInputService")
+	local Mouse = game.Players.LocalPlayer:GetMouse()
+	local FLYING = false
+	local defFlyspeed, SPEED = 1, 0
+	local CONTROL, lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}, {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+	if KeyDown or KeyUp then KeyDown:Disconnect()KeyUp:Disconnect()end
+	if str == true then
+		FLYING = true
+		local player = Players.LocalPlayer
+		local character = player.Character
+		repeat wait() until character and Root(character)
+		local human = character:FindFirstChildOfClass("Humanoid")
+		if not human then return end
+		human.PlatformStand = true
+		local root = Root(character)
+		local BG = Instance.new('BodyGyro')
+		local BV = Instance.new('BodyVelocity')
+		BG.P = 9e4
+		BG.Parent = root
+		BV.Parent = root
+		BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		BG.cframe = root.CFrame
+		BV.velocity = Vector3.new(0, 0, 0)
+		BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		task.spawn(function()
+			repeat wait()
+				if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
+					Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+				end
+				if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
+					SPEED = 50
+				elseif not (CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0) and SPEED ~= 0 then
+					SPEED = 0
+				end
+				if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 or (CONTROL.Q + CONTROL.E) ~= 0 then
+					BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+					lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
+				elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and (CONTROL.Q + CONTROL.E) == 0 and SPEED ~= 0 then
+					BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, (lCONTROL.F + lCONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+				else
+					BV.velocity = Vector3.new(0, 0, 0)
+				end
+				BG.cframe = workspace.CurrentCamera.CoordinateFrame
+			until not FLYING
+			CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			SPEED = 0
+			BG:Destroy()
+			BV:Destroy()
+			human.PlatformStand = false
+		end)
+	elseif str == false then
+		FLYING = false
+		CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+		lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+		SPEED = 0
+		if KeyDown or KeyUp then KeyDown:Disconnect() KeyUp:Disconnect() end
+		if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')then Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false end
+		pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
+	end
+	KeyDown = Mouse.KeyDown:Connect(function(key)
+		if key:lower() == 'w' then CONTROL.F = (speed and defFlyspeed)
+		elseif key:lower() == 's' then CONTROL.B = - (speed and defFlyspeed)
+		elseif key:lower() == 'a' then CONTROL.L = - (speed and defFlyspeed)
+		elseif key:lower() == 'd' then CONTROL.R = (speed and defFlyspeed)
+		elseif key:lower() == 'e' then CONTROL.Q = (speed and defFlyspeed)*2
+		elseif key:lower() == 'q' then CONTROL.E = -(speed and defFlyspeed)*2 end
+		pcall(function()workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
+	end)
+	KeyUp = Mouse.KeyUp:Connect(function(key)
+		if key:lower() == 'w' then CONTROL.F = 0
+		elseif key:lower() == 's' then CONTROL.B = 0
+		elseif key:lower() == 'a' then CONTROL.L = 0
+		elseif key:lower() == 'd' then CONTROL.R = 0
+		elseif key:lower() == 'e' then CONTROL.Q = 0
+		elseif key:lower() == 'q' then CONTROL.E = 0 end
+	end)
+end
+local function swim(str)
+	local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+	if str == true then
+		if not swimming and Players.LocalPlayer.Character and human then
+			local gravity = workspace.Gravity
+			workspace.Gravity = 0
+			local swimDied = function()workspace.Gravity = gravity swimming = false end
+			gravReset = human.Died:Connect(swimDied)
+			local enums = Enum.HumanoidStateType:GetEnumItems()
+			table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
+			for i, v in pairs(enums) do human:SetStateEnabled(v, false)end
+			human:ChangeState(Enum.HumanoidStateType.Swimming)
+			swimbeat = game:GetService("RunService").Heartbeat:Connect(function()
+				pcall(function()
+					Players.LocalPlayer.Character.HumanoidRootPart.Velocity = ((human.MoveDirection ~= Vector3.new() or game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space)) and Players.LocalPlayer.Character.HumanoidRootPart.Velocity or Vector3.new())
+				end)
+			end)
+			swimming = true
+		end
+	elseif str == false then
+		if Players.LocalPlayer and Players.LocalPlayer.Character and human then
+			workspace.Gravity = gravity
+			swimming = false
+			if gravReset then gravReset:Disconnect()end
+			if swimbeat ~= nil then swimbeat:Disconnect()swimbeat = nil end
+			local enums = Enum.HumanoidStateType:GetEnumItems()
+			table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
+			for i, v in pairs(enums) do human:SetStateEnabled(v, true)end
+		end
+	end
+end
+commands = {
+	["test"] = function(player)
+		local success, err = pcall(function()end)
+		if not success then info("Error: "..err, "Error")end
+	end,
+	["example"] = function(player, target, argument)
+		local success, err = pcall(function()
+			local es = Player(target)
+			if es then
+			else info("Missing Player.\nExample: cmd_name player argument", "Missing Argument")end
+		end)
+		if not success then info("Error: "..err, "Error")end
+	end,
+	[""] = function(player, target)
+		local success, err = pcall(function()
+			if target then
+			else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
+		end)
+		if not success then info("Error: "..err, "Error")end
+	end,
+	[""] = function(player)
+		local success, err = pcall(function()
+		end)
+		if not success then info("Error: "..err, "Error")end
+	end,
+	["fly"] = function(player, target)if target == "true" then fly(true)elseif target == "false" then fly(false)else end end,
+	["noclip"] = function(player, target)
+		local success, err = pcall(function()
+			if target then
+			else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
+		end)
+		if not success then info("Error: "..err, "Error")end
+	end,
+	["float"] = function(player, target)
+		--[[if target == "true"then
+			float(target)
+			info("Floating true", "Command")
+		elseif target == "false" then
+			float(target)
+			info("Floating false", "Command")
+		else info("Missing argument\nExample: cmd_name argument(true/false)", "Missing Argument")end]]
+		info("We are reworking this script.", "Command")
+	end,
+	["walkspeed"] = function(player, target)
+		local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+		human.WalkSpeed = target or 16
+		info("Walkspeed "..target, "Command")
+	end,
+	["jumppower"] = function(player, target)
+		local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+		human.JumpPower = target or 50
+		info("Jumppower "..target, "Command")
+	end,
+	["sit"] = function(player)
+		local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+		human.Sit = true
+	end,
+	["rejoin"] = function(player)
+		if #game.Players:GetPlayers() <= 1 then 
+			game.Players.LocalPlayer:Kick("\nRejoining...")wait()
+			game.TeleportService:Teleport(game.PlaceId, game.Players.LocalPlayer)
+		else 
+			game.TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+		end
+	end,
+	["shift"] = function(player, target)
+		if target == "true" then
+			Players.LocalPlayer.DevEnableMouseLock = true
+		elseif target == "false" then 
+			Players.LocalPlayer.DevEnableMouseLock = false
+		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
+	end,
+	["teleport"] = function(player, target)
+		local players = Player(target)
+		if players then
+			for i,v in pairs(players)do
+				if Players[v].Character ~= nil then
+					local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+					if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') and human.SeatPart then human.Sit = false wait(.1)end
+					Root(Players.LocalPlayer.Character).CFrame = Root(Players[v].Character).CFrame + Vector3.new(3,1,0)
+				end
+			end
+			local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
+			delay(1, function()BeenASecond = true end)
+			while not BeenASecond do
+				for _, v in ipairs(Players.LocalPlayer.Character:GetDescendants())do if v.IsA(v, "BasePart") then v.Velocity, v.RotVelocity = V3, V3 end end
+				wait()
+			end
+		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
+	end,
+	["logs"] = function(player)
+		TextLabel.Visible = true
+	end,
+	["swim"] = function(player, target)
+		if target == "true" then
+			swim(true)
+		elseif target == "false" then
+			swim(false)
+		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
+	end,
+}
+local function handleCommandInput(command)
+	local splitMessage = command:lower():split(" ")
+	local commandName = splitMessage[1]
+	local target = splitMessage[2]
+	local argument = splitMessage[3]
+	local success, err = pcall(function()
+		if commands[commandName]then 
+			commands[commandName](game.Players.LocalPlayer.Name, target, argument)
+			log("Command: "..command, "Executed command", "Command")print("Executed: "..commandName)
+		end
+	end)
+	if not success then
+		print(">:ERROR	"..err)
+		log("|ERROR: "..err, "Error: "..err, "ERROR")
+	end
+end
+EXECUTE_BUTTON.MouseButton1Click:Connect(function()handleCommandInput(BEFEHL_BOX.Text)end)
