@@ -142,7 +142,27 @@ SCHLIESEN2_BUTTON.TextSize = 14.000
 SCHLIESEN2_BUTTON.TextWrapped = true
 
 local chatHistory = {}
-SCHLIESEN1_BUTTON.MouseButton1Click:Connect(function()script:Destroy()end)
+local UserInputService = game:GetService("UserInputService")
+local gui = TextLabel
+local dragging
+local dragInput
+local dragStart
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+gui.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = gui.Position
+		input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+	end
+end)
+gui.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+UserInputService.InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+SCHLIESEN1_BUTTON.MouseButton1Click:Connect(function()HAUPT_GUI:Destroy()end)
 SCHLIESEN2_BUTTON.MouseButton1Click:Connect(function()TextLabel.Visible = false end)
 local function logs(message)
 	LOG_LABEL.Text = table.concat(chatHistory, "\n")
@@ -210,8 +230,6 @@ local QEfly = true
 local flyspeed = 1
 local function fly()
 	local Mouse = game.Players.LocalPlayer:GetMouse()
-	repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and Root(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-	repeat wait() until Mouse
 	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
 	local T = Root(Players.LocalPlayer.Character)
 	local CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
@@ -253,40 +271,25 @@ local function fly()
 			SPEED = 0
 			BG:Destroy()
 			BV:Destroy()
-			if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-				Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
-			end
+			if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')then Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false end
 		end)
 	end
 	flyKeyDown = Mouse.KeyDown:Connect(function(KEY)
-		if KEY:lower() == 'w' then
-			CONTROL.F = flyspeed
-		elseif KEY:lower() == 's' then
-			CONTROL.B = - flyspeed
-		elseif KEY:lower() == 'a' then
-			CONTROL.L = - flyspeed
-		elseif KEY:lower() == 'd' then 
-			CONTROL.R = flyspeed
-		elseif QEfly and KEY:lower() == 'e' then
-			CONTROL.Q = flyspeed*2
-		elseif QEfly and KEY:lower() == 'q' then
-			CONTROL.E = -flyspeed*2
-		end
+		if KEY:lower() == 'w' then CONTROL.F = flyspeed
+		elseif KEY:lower() == 's' then CONTROL.B = - flyspeed
+		elseif KEY:lower() == 'a' then CONTROL.L = - flyspeed
+		elseif KEY:lower() == 'd' then CONTROL.R = flyspeed
+		elseif QEfly and KEY:lower() == 'e' then CONTROL.Q = flyspeed*2
+		elseif QEfly and KEY:lower() == 'q' then CONTROL.E = -flyspeed*2 end
 		pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
 	end)
 	flyKeyUp = Mouse.KeyUp:Connect(function(KEY)
-		if KEY:lower() == 'w' then
-			CONTROL.F = 0
-		elseif KEY:lower() == 's' then
-			CONTROL.B = 0
-		elseif KEY:lower() == 'a' then
-			CONTROL.L = 0
-		elseif KEY:lower() == 'd' then
-			CONTROL.R = 0
-		elseif KEY:lower() == 'e' then
-			CONTROL.Q = 0
-		elseif KEY:lower() == 'q' then
-			CONTROL.E = 0
+		if KEY:lower() == 'w' then CONTROL.F = 0
+		elseif KEY:lower() == 's' then CONTROL.B = 0
+		elseif KEY:lower() == 'a' then CONTROL.L = 0
+		elseif KEY:lower() == 'd' then CONTROL.R = 0
+		elseif KEY:lower() == 'e' then CONTROL.Q = 0
+		elseif KEY:lower() == 'q' then CONTROL.E = 0
 		end
 	end)
 	FLY()
