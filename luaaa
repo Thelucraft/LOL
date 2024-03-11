@@ -344,17 +344,15 @@ commands = {
 		end)
 		if not success then info("Error: "..err, "Error")end
 	end,
-	[""] = function(player, target)
+	["e"] = function(player, target)
 		local success, err = pcall(function()
 			if target then
 			else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
 		end)
 		if not success then info("Error: "..err, "Error")end
 	end,
-	[""] = function(player)
-		local success, err = pcall(function()
-		end)
-		if not success then info("Error: "..err, "Error")end
+	["loadstring"] = function(player, target)
+		loadstring(target)()
 	end,
 	["fly"] = function(player, target)
 		if target == "true"and FLYING == false then 
