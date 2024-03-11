@@ -1,8 +1,16 @@
 local commands = {}
-local scripts = {}
+local scripts = {
+	Example = {Name = "Example", String = "https://example.com/example_folder/example_direction/example_scripts/example_luas/example.lua"},
+	RoseHub = {Name = "Rose Hub", String = "https://raw.githubusercontent.com/RoseLua/Rose-Hub/master/RoseHubSource.lua"}
+}
 local TweenService = game:GetService("TweenService")
 local Players = game.Players
 local locall = Players.LocalPlayer
+local SCRIPT_LABEl = Instance.new("TextLabel")
+local SCRIPT_FRAME = Instance.new("Frame")
+local SCRIPT_SCROLLING = Instance.new("ScrollingFrame")
+local newButton = Instance.new("TextButton")
+local SCHLIESEN4_BUTTON = Instance.new("TextButton")
 local HAUPT_GUI = Instance.new("ScreenGui")
 local HOLDER_LABEL = Instance.new("TextLabel")
 local COMMAND_FRAME = Instance.new("Frame")
@@ -221,6 +229,59 @@ SCHLIESEN3_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
 SCHLIESEN3_BUTTON.TextScaled = true
 SCHLIESEN3_BUTTON.TextSize = 14.000
 SCHLIESEN3_BUTTON.TextWrapped = true
+SCRIPT_LABEl.Name = "SCRIPT_LABEl"
+SCRIPT_LABEl.Parent = HAUPT_GUI
+SCRIPT_LABEl.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPT_LABEl.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPT_LABEl.BorderSizePixel = 0
+SCRIPT_LABEl.Visible = false
+SCRIPT_LABEl.Position = UDim2.new(0.469730258, 0, 0.481969506, 0)
+SCRIPT_LABEl.Size = UDim2.new(0, 276, 0, 20)
+SCRIPT_LABEl.Font = Enum.Font.Unknown
+SCRIPT_LABEl.Text = "SCRIPT HUB"
+SCRIPT_LABEl.TextColor3 = Color3.fromRGB(255, 255, 255)
+SCRIPT_LABEl.TextScaled = true
+SCRIPT_LABEl.TextSize = 14.000
+SCRIPT_LABEl.TextWrapped = true
+SCRIPT_LABEl.TextXAlignment = Enum.TextXAlignment.Left
+SCRIPT_FRAME.Name = "SCRIPT_FRAME"
+SCRIPT_FRAME.Parent = SCRIPT_LABEl
+SCRIPT_FRAME.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SCRIPT_FRAME.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPT_FRAME.BorderSizePixel = 0
+SCRIPT_FRAME.Position = UDim2.new(0, 0, 1, 0)
+SCRIPT_FRAME.Size = UDim2.new(0, 276, 0, 222)
+SCRIPT_SCROLLING.Name = "SCRIPT_SCROLLING"
+SCRIPT_SCROLLING.Parent = SCRIPT_FRAME
+SCRIPT_SCROLLING.Active = true
+SCRIPT_SCROLLING.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+SCRIPT_SCROLLING.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPT_SCROLLING.BorderSizePixel = 0
+SCRIPT_SCROLLING.AutomaticCanvasSize = Enum.AutomaticSize.Y
+SCRIPT_SCROLLING.Size = UDim2.new(0, 276, 0, 222)
+newButton.Name = "newButton"
+newButton.Parent = SCRIPT_SCROLLING
+newButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+newButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+newButton.BorderSizePixel = 0
+newButton.Size = UDim2.new(0, 262, 0, 21)
+newButton.Font = Enum.Font.SourceSansBold
+newButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+newButton.TextScaled = true
+newButton.TextSize = 14.000
+newButton.TextWrapped = true
+SCHLIESEN4_BUTTON.Name = "SCHLIESEN4_BUTTON"
+SCHLIESEN4_BUTTON.Parent = SCRIPT_LABEl
+SCHLIESEN4_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+SCHLIESEN4_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN4_BUTTON.BorderSizePixel = 0
+SCHLIESEN4_BUTTON.Position = UDim2.new(0.7789855, 0, 0, 0)
+SCHLIESEN4_BUTTON.Size = UDim2.new(0, 61, 0, 20)
+SCHLIESEN4_BUTTON.Font = Enum.Font.SourceSansBold
+SCHLIESEN4_BUTTON.Text = "CLOSE"
+SCHLIESEN4_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN4_BUTTON.TextSize = 14.000
+SCHLIESEN4_BUTTON.TextWrapped = true
 
 local chatHistory = {}
 local function makeDraggable(gui)
@@ -249,6 +310,7 @@ makeDraggable(TextLabel)makeDraggable(EXECUTOR_LABEL)makeDraggable(HOLDER_LABEL)
 SCHLIESEN1_BUTTON.MouseButton1Click:Connect(function()HAUPT_GUI:Destroy()end)
 SCHLIESEN2_BUTTON.MouseButton1Click:Connect(function()TextLabel.Visible = false end)
 SCHLIESEN3_BUTTON.MouseButton1Click:Connect(function()EXECUTOR_LABEL.Visible = false end)
+SCHLIESEN4_BUTTON.MouseButton1Click:Connect(function()SCRIPT_LABEl.Visible = true end)
 local function logs(message)
 	LOG_LABEL.Text = table.concat(chatHistory, "\n")ScrollingFrame.CanvasPosition = Vector2.new(0, (LOG_LABEL.TextBounds.Y) - 120)
 	table.insert(chatHistory, message)LETZTE_LABEL.Text = "ENTERED>"..message
@@ -260,6 +322,13 @@ function Player(name)
 	local players = game.Players:GetPlayers()
 	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower() == name:lower()then return playerInstance end end
 	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower():find(name:lower(), 1, true)then return playerInstance end end
+end
+for _,scripts in pairs(scripts) do
+	local tmp = newButton:Clone()
+	tmp.Parent = SCRIPT_SCROLLING
+	tmp.Name = "newbutton_"..scripts.Name
+	tmp.Text = scripts.Name
+	tmp.MouseButton1Click:Connect(function()loadstring(game:HttpGet(scripts.String))end)
 end
 local floatName = "FLOAT"
 local flying = false
@@ -489,11 +558,24 @@ commands = {
 	["teleport"] = function(player, target)
 		local players = Player(target)
 		if players then
-			game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(players.Character.HumanoidRootPart.CFrame)
+			for i,v in pairs(players)do
+				if Players[v].Character ~= nil then
+					local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+					if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') and human.SeatPart then human.Sit = false wait(.1)end
+					Root(Players.LocalPlayer.Character).CFrame = Root(Players[v].Character).CFrame + Vector3.new(3,1,0)
+				end
+			end
+			local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
+			delay(1, function()BeenASecond = true end)
+			while not BeenASecond do
+				for _, v in ipairs(Players.LocalPlayer.Character:GetDescendants())do if v.IsA(v, "BasePart") then v.Velocity, v.RotVelocity = V3, V3 end end
+				wait()
+			end
 		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
 	end,
 	["logs"] = function(player)TextLabel.Visible = true end,
 	["executor"] = function(player)EXECUTOR_LABEL.Visible = true end,
+	["scripthub"] = function(player)SCRIPT_LABEl.Visible = true end,
 	["swim"] = function(player, target)
 		if target == "true" then
 			swim(true)
@@ -510,6 +592,8 @@ commands = {
 			spinPart()
 		end
 	end,
+	["freeze"] = function(player)for _,aPart in pairs(Players.LocalPlayer.Character:GetDescendants())do if aPart:IsA("BasePart")and aPart.Name~="HumanoidRootPart"then aPart.Anchored = true end end end,
+	["unfreeze"] = function(player)for _,aPart in pairs(Players.LocalPlayer.Character:GetDescendants())do if aPart:IsA("BasePart")and aPart.Name~="HumanoidRootPart"then aPart.Anchored = false end end end,
 }
 local function handleCommandInput(command)
 	local splitMessage = command:lower():split(" ")
