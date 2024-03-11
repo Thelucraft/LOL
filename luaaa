@@ -395,12 +395,11 @@ commands = {
 		human.Sit = true
 	end,
 	["rejoin"] = function(player)
+		local tp = game:GetService("TeleportService")
 		if #game.Players:GetPlayers() <= 1 then 
 			game.Players.LocalPlayer:Kick("\nRejoining...")wait()
-			game.TeleportService:Teleport(game.PlaceId, game.Players.LocalPlayer)
-		else 
-			game.TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
-		end
+			tp:Teleport(game.PlaceId, game.Players.LocalPlayer)
+		else tp:TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)end
 	end,
 	["shift"] = function(player, target)
 		if target == "true" then
