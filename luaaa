@@ -352,7 +352,7 @@ commands = {
 		if not success then info("Error: "..err, "Error")end
 	end,
 	["loadstring"] = function(player, target)
-		loadstring(target)()
+		local success, err = pcall(loadstring(target))if not success then warn("Script execution failed:", err)end
 	end,
 	["fly"] = function(player, target)
 		if target == "true"and FLYING == false then 
