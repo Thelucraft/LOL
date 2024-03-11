@@ -20,7 +20,7 @@ local EXECUTOR_FRAME = Instance.new("Frame")
 local EXECUTOR_SCROLLING = Instance.new("ScrollingFrame")
 local SCRIPTE_BOX = Instance.new("TextBox")
 local EXECUTOR_BUTTON = Instance.new("TextButton")
-local SCLIESEN3_BUTTON = Instance.new("TextButton")
+local SCHLIESEN3_BUTTON = Instance.new("TextButton")
 HAUPT_GUI.Name = "HAUPT_GUI"
 HAUPT_GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 HOLDER_LABEL.Name = "HOLDER_LABEL"
@@ -111,6 +111,7 @@ ScrollingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ScrollingFrame.BorderSizePixel = 0
 ScrollingFrame.Size = UDim2.new(0, 365, 0, 137)
+ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 LOG_LABEL.Name = "LOG_LABEL"
 LOG_LABEL.Parent = ScrollingFrame
 LOG_LABEL.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -122,6 +123,7 @@ LOG_LABEL.TextColor3 = Color3.fromRGB(0, 135, 0)
 LOG_LABEL.TextSize = 17.000
 LOG_LABEL.TextXAlignment = Enum.TextXAlignment.Left
 LOG_LABEL.TextYAlignment = Enum.TextYAlignment.Top
+LOG_LABEL.TextWrapped = true
 LETZTE_LABEL.Name = "LETZTE_LABEL"
 LETZTE_LABEL.Parent = LOGS_FRAME
 LETZTE_LABEL.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
@@ -155,12 +157,12 @@ EXECUTOR_LABEL.Position = UDim2.new(0.558343828, 0, 0.41782248, 0)
 EXECUTOR_LABEL.Size = UDim2.new(0, 405, 0, 20)
 EXECUTOR_LABEL.Font = Enum.Font.Unknown
 EXECUTOR_LABEL.Text = "EXECUTE"
+EXECUTOR_LABEL.Visible = false
 EXECUTOR_LABEL.TextColor3 = Color3.fromRGB(255, 255, 255)
 EXECUTOR_LABEL.TextScaled = true
 EXECUTOR_LABEL.TextSize = 14.000
 EXECUTOR_LABEL.TextWrapped = true
 EXECUTOR_LABEL.TextXAlignment = Enum.TextXAlignment.Left
-
 EXECUTOR_FRAME.Name = "EXECUTOR_FRAME"
 EXECUTOR_FRAME.Parent = EXECUTOR_LABEL
 EXECUTOR_FRAME.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -168,15 +170,14 @@ EXECUTOR_FRAME.BorderColor3 = Color3.fromRGB(0, 0, 0)
 EXECUTOR_FRAME.BorderSizePixel = 0
 EXECUTOR_FRAME.Position = UDim2.new(0, 0, 1, 0)
 EXECUTOR_FRAME.Size = UDim2.new(0, 405, 0, 205)
-
 EXECUTOR_SCROLLING.Name = "EXECUTOR_SCROLLING"
 EXECUTOR_SCROLLING.Parent = EXECUTOR_FRAME
 EXECUTOR_SCROLLING.Active = true
 EXECUTOR_SCROLLING.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 EXECUTOR_SCROLLING.BorderColor3 = Color3.fromRGB(0, 0, 0)
 EXECUTOR_SCROLLING.BorderSizePixel = 0
+EXECUTOR_SCROLLING.AutomaticCanvasSize = Enum.AutomaticSize.Y
 EXECUTOR_SCROLLING.Size = UDim2.new(0, 405, 0, 166)
-
 SCRIPTE_BOX.Name = "SCRIPTE_BOX"
 SCRIPTE_BOX.Parent = EXECUTOR_SCROLLING
 SCRIPTE_BOX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -191,9 +192,9 @@ SCRIPTE_BOX.PlaceholderText = "SCRIPT HERE"
 SCRIPTE_BOX.Text = ""
 SCRIPTE_BOX.TextColor3 = Color3.fromRGB(0, 0, 0)
 SCRIPTE_BOX.TextSize = 17.000
+SCRIPTE_BOX.TextWrapped = true
 SCRIPTE_BOX.TextXAlignment = Enum.TextXAlignment.Left
 SCRIPTE_BOX.TextYAlignment = Enum.TextYAlignment.Top
-
 EXECUTOR_BUTTON.Name = "EXECUTOR_BUTTON"
 EXECUTOR_BUTTON.Parent = EXECUTOR_FRAME
 EXECUTOR_BUTTON.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -207,60 +208,58 @@ EXECUTOR_BUTTON.TextColor3 = Color3.fromRGB(255, 255, 255)
 EXECUTOR_BUTTON.TextScaled = true
 EXECUTOR_BUTTON.TextSize = 14.000
 EXECUTOR_BUTTON.TextWrapped = true
-
-SCLIESEN3_BUTTON.Name = "SCLIESEN3_BUTTON"
-SCLIESEN3_BUTTON.Parent = EXECUTOR_LABEL
-SCLIESEN3_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-SCLIESEN3_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SCLIESEN3_BUTTON.BorderSizePixel = 0
-SCLIESEN3_BUTTON.Position = UDim2.new(0.849382699, 0, 0, 0)
-SCLIESEN3_BUTTON.Size = UDim2.new(0, 61, 0, 20)
-SCLIESEN3_BUTTON.Font = Enum.Font.SourceSansBold
-SCLIESEN3_BUTTON.Text = "Close"
-SCLIESEN3_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
-SCLIESEN3_BUTTON.TextScaled = true
-SCLIESEN3_BUTTON.TextSize = 14.000
-SCLIESEN3_BUTTON.TextWrapped = true
+SCHLIESEN3_BUTTON.Name = "SCLIESEN3_BUTTON"
+SCHLIESEN3_BUTTON.Parent = EXECUTOR_LABEL
+SCHLIESEN3_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+SCHLIESEN3_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN3_BUTTON.BorderSizePixel = 0
+SCHLIESEN3_BUTTON.Position = UDim2.new(0.849382699, 0, 0, 0)
+SCHLIESEN3_BUTTON.Size = UDim2.new(0, 61, 0, 20)
+SCHLIESEN3_BUTTON.Font = Enum.Font.SourceSansBold
+SCHLIESEN3_BUTTON.Text = "Close"
+SCHLIESEN3_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCHLIESEN3_BUTTON.TextScaled = true
+SCHLIESEN3_BUTTON.TextSize = 14.000
+SCHLIESEN3_BUTTON.TextWrapped = true
 
 local chatHistory = {}
-local UserInputService = game:GetService("UserInputService")
-local gui = TextLabel
-local dragging
-local dragInput
-local dragStart
-local startPos
-local function update(input)
-	local delta = input.Position - dragStart
-	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
-gui.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = gui.Position
-		input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+local function makeDraggable(gui)
+	local UserInputService = game:GetService("UserInputService")
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 	end
-end)
-gui.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
-UserInputService.InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+		end
+	end)
+	gui.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+	UserInputService.InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+end
+
+makeDraggable(TextLabel)makeDraggable(EXECUTOR_LABEL)makeDraggable(HOLDER_LABEL)
 SCHLIESEN1_BUTTON.MouseButton1Click:Connect(function()HAUPT_GUI:Destroy()end)
 SCHLIESEN2_BUTTON.MouseButton1Click:Connect(function()TextLabel.Visible = false end)
+SCHLIESEN3_BUTTON.MouseButton1Click:Connect(function()EXECUTOR_LABEL.Visible = false end)
 local function logs(message)
-	LOG_LABEL.Text = table.concat(chatHistory, "\n")
-	ScrollingFrame.CanvasPosition = Vector2.new(0, (LOG_LABEL.TextBounds.Y) - 120)
-	table.insert(chatHistory, message)
-	LETZTE_LABEL.Text = "ENTERED>"..message
-	while #chatHistory > 400 do table.remove(chatHistory, 1)end
-	LOG_LABEL.Text = table.concat(chatHistory, "\n> ")
+	LOG_LABEL.Text = table.concat(chatHistory, "\n")ScrollingFrame.CanvasPosition = Vector2.new(0, (LOG_LABEL.TextBounds.Y) - 120)
+	table.insert(chatHistory, message)LETZTE_LABEL.Text = "ENTERED>"..message
+	while #chatHistory > 200 do table.remove(chatHistory, 1)end LOG_LABEL.Text = table.concat(chatHistory, "\n> ")
 end
-function Root(character)
-	local root = character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('UpperTorso') or character:FindFirstChild('Torso')
-	return root 
-end
+EXECUTE_BUTTON.MouseButton1Click:Connect(function()loadstring(SCRIPTE_BOX.Text)logs("loadstring("..SCRIPTE_BOX.Text..")")end)
+function Root(character)local root = character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('UpperTorso') or character:FindFirstChild('Torso')return root end
 function Player(name)
 	local players = game.Players:GetPlayers()
-	for _, player in ipairs(players) do if player.Name == name then return player end end
-	return nil
+	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower() == name:lower()then return playerInstance end end
+	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower():find(name:lower(), 1, true)then return playerInstance end end
 end
 local floatName = "FLOAT"
 local flying = false
@@ -493,9 +492,8 @@ commands = {
 			game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(players.Character.HumanoidRootPart.CFrame)
 		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
 	end,
-	["logs"] = function(player)
-		TextLabel.Visible = true
-	end,
+	["logs"] = function(player)TextLabel.Visible = true end,
+	["executor"] = function(player)EXECUTOR_LABEL.Visible = true end,
 	["swim"] = function(player, target)
 		if target == "true" then
 			swim(true)
