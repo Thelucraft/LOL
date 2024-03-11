@@ -1,4 +1,5 @@
 local commands = {}
+local scripts = {}
 local TweenService = game:GetService("TweenService")
 local Players = game.Players
 local locall = Players.LocalPlayer
@@ -14,7 +15,12 @@ local ScrollingFrame = Instance.new("ScrollingFrame")
 local LOG_LABEL = Instance.new("TextLabel")
 local LETZTE_LABEL = Instance.new("TextLabel")
 local SCHLIESEN2_BUTTON = Instance.new("TextButton")
-
+local EXECUTOR_LABEL = Instance.new("TextLabel")
+local EXECUTOR_FRAME = Instance.new("Frame")
+local EXECUTOR_SCROLLING = Instance.new("ScrollingFrame")
+local SCRIPTE_BOX = Instance.new("TextBox")
+local EXECUTOR_BUTTON = Instance.new("TextButton")
+local SCLIESEN3_BUTTON = Instance.new("TextButton")
 HAUPT_GUI.Name = "HAUPT_GUI"
 HAUPT_GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 HOLDER_LABEL.Name = "HOLDER_LABEL"
@@ -140,6 +146,81 @@ SCHLIESEN2_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
 SCHLIESEN2_BUTTON.TextScaled = true
 SCHLIESEN2_BUTTON.TextSize = 14.000
 SCHLIESEN2_BUTTON.TextWrapped = true
+EXECUTOR_LABEL.Name = "EXECUTOR_LABEL"
+EXECUTOR_LABEL.Parent = HAUPT_GUI
+EXECUTOR_LABEL.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_LABEL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_LABEL.BorderSizePixel = 0
+EXECUTOR_LABEL.Position = UDim2.new(0.558343828, 0, 0.41782248, 0)
+EXECUTOR_LABEL.Size = UDim2.new(0, 405, 0, 20)
+EXECUTOR_LABEL.Font = Enum.Font.Unknown
+EXECUTOR_LABEL.Text = "EXECUTE"
+EXECUTOR_LABEL.TextColor3 = Color3.fromRGB(255, 255, 255)
+EXECUTOR_LABEL.TextScaled = true
+EXECUTOR_LABEL.TextSize = 14.000
+EXECUTOR_LABEL.TextWrapped = true
+EXECUTOR_LABEL.TextXAlignment = Enum.TextXAlignment.Left
+
+EXECUTOR_FRAME.Name = "EXECUTOR_FRAME"
+EXECUTOR_FRAME.Parent = EXECUTOR_LABEL
+EXECUTOR_FRAME.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+EXECUTOR_FRAME.BorderColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_FRAME.BorderSizePixel = 0
+EXECUTOR_FRAME.Position = UDim2.new(0, 0, 1, 0)
+EXECUTOR_FRAME.Size = UDim2.new(0, 405, 0, 205)
+
+EXECUTOR_SCROLLING.Name = "EXECUTOR_SCROLLING"
+EXECUTOR_SCROLLING.Parent = EXECUTOR_FRAME
+EXECUTOR_SCROLLING.Active = true
+EXECUTOR_SCROLLING.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+EXECUTOR_SCROLLING.BorderColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_SCROLLING.BorderSizePixel = 0
+EXECUTOR_SCROLLING.Size = UDim2.new(0, 405, 0, 166)
+
+SCRIPTE_BOX.Name = "SCRIPTE_BOX"
+SCRIPTE_BOX.Parent = EXECUTOR_SCROLLING
+SCRIPTE_BOX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SCRIPTE_BOX.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPTE_BOX.BorderSizePixel = 0
+SCRIPTE_BOX.Position = UDim2.new(0, 0, -9.19204126e-08, 0)
+SCRIPTE_BOX.Size = UDim2.new(0, 391, 0, 498)
+SCRIPTE_BOX.Font = Enum.Font.Unknown
+SCRIPTE_BOX.MultiLine = true
+SCRIPTE_BOX.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPTE_BOX.PlaceholderText = "SCRIPT HERE"
+SCRIPTE_BOX.Text = ""
+SCRIPTE_BOX.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCRIPTE_BOX.TextSize = 17.000
+SCRIPTE_BOX.TextXAlignment = Enum.TextXAlignment.Left
+SCRIPTE_BOX.TextYAlignment = Enum.TextYAlignment.Top
+
+EXECUTOR_BUTTON.Name = "EXECUTOR_BUTTON"
+EXECUTOR_BUTTON.Parent = EXECUTOR_FRAME
+EXECUTOR_BUTTON.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+EXECUTOR_BUTTON.BorderSizePixel = 0
+EXECUTOR_BUTTON.Position = UDim2.new(0, 0, 0.873170733, 0)
+EXECUTOR_BUTTON.Size = UDim2.new(0, 405, 0, 26)
+EXECUTOR_BUTTON.Font = Enum.Font.SourceSansBold
+EXECUTOR_BUTTON.Text = "EXECUTE"
+EXECUTOR_BUTTON.TextColor3 = Color3.fromRGB(255, 255, 255)
+EXECUTOR_BUTTON.TextScaled = true
+EXECUTOR_BUTTON.TextSize = 14.000
+EXECUTOR_BUTTON.TextWrapped = true
+
+SCLIESEN3_BUTTON.Name = "SCLIESEN3_BUTTON"
+SCLIESEN3_BUTTON.Parent = EXECUTOR_LABEL
+SCLIESEN3_BUTTON.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+SCLIESEN3_BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCLIESEN3_BUTTON.BorderSizePixel = 0
+SCLIESEN3_BUTTON.Position = UDim2.new(0.849382699, 0, 0, 0)
+SCLIESEN3_BUTTON.Size = UDim2.new(0, 61, 0, 20)
+SCLIESEN3_BUTTON.Font = Enum.Font.SourceSansBold
+SCLIESEN3_BUTTON.Text = "Close"
+SCLIESEN3_BUTTON.TextColor3 = Color3.fromRGB(0, 0, 0)
+SCLIESEN3_BUTTON.TextScaled = true
+SCLIESEN3_BUTTON.TextSize = 14.000
+SCLIESEN3_BUTTON.TextWrapped = true
 
 local chatHistory = {}
 local UserInputService = game:GetService("UserInputService")
@@ -409,19 +490,7 @@ commands = {
 	["teleport"] = function(player, target)
 		local players = Player(target)
 		if players then
-			for i,v in pairs(players)do
-				if Players[v].Character ~= nil then
-					local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
-					if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') and human.SeatPart then human.Sit = false wait(.1)end
-					Root(Players.LocalPlayer.Character).CFrame = Root(Players[v].Character).CFrame + Vector3.new(3,1,0)
-				end
-			end
-			local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
-			delay(1, function()BeenASecond = true end)
-			while not BeenASecond do
-				for _, v in ipairs(Players.LocalPlayer.Character:GetDescendants())do if v.IsA(v, "BasePart") then v.Velocity, v.RotVelocity = V3, V3 end end
-				wait()
-			end
+			game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(players.Character.HumanoidRootPart.CFrame)
 		else info("Missing argument\nExample: cmd_name argument", "Missing Argument")end
 	end,
 	["logs"] = function(player)
