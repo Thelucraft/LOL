@@ -254,7 +254,7 @@ local function logs(message)
 	table.insert(chatHistory, message)LETZTE_LABEL.Text = "ENTERED>"..message
 	while #chatHistory > 200 do table.remove(chatHistory, 1)end LOG_LABEL.Text = table.concat(chatHistory, "\n> ")
 end
-EXECUTE_BUTTON.MouseButton1Click:Connect(function()loadstring(SCRIPTE_BOX.Text)logs("loadstring("..SCRIPTE_BOX.Text..")")end)
+EXECUTOR_BUTTON.MouseButton1Click:Connect(function()loadstring(SCRIPTE_BOX.Text)logs("loadstring("..SCRIPTE_BOX.Text..")")end)
 function Root(character)local root = character:FindFirstChild('HumanoidRootPart') or character:FindFirstChild('UpperTorso') or character:FindFirstChild('Torso')return root end
 function Player(name)
 	local players = game.Players:GetPlayers()
