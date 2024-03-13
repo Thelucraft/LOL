@@ -323,13 +323,6 @@ function Player(name)
 	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower() == name:lower()then return playerInstance end end
 	for _, playerInstance in ipairs(players)do if playerInstance.Name:lower():find(name:lower(), 1, true)then return playerInstance end end
 end
-for _,scripts in pairs(scripts) do
-	local tmp = newButton:Clone()
-	tmp.Parent = SCRIPT_SCROLLING
-	tmp.Name = "newbutton_"..scripts.Name
-	tmp.Text = scripts.Name
-	tmp.MouseButton1Click:Connect(function()loadstring(game:HttpGet(scripts.String))end)
-end
 local floatName = "FLOAT"
 local flying = false
 local noclipped = false
